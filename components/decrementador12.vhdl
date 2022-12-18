@@ -17,15 +17,16 @@ BEGIN
   VARIABLE qv : INTEGER RANGE 3599 DOWNTO 0;
   BEGIN
 
-    IF Clock_decre 'EVENT AND Clock_decre = '1'AND load = '1' THEN
-	qv := data_decre;
-	IF Clock_decre 'EVENT AND Clock_decre = '1' THEN
-	  qv := qv - 1;
+    IF Clock_decre 'EVENT AND Clock_decre = '1' THEN
+	IF load = '1' THEN
+	  qv := data_decre;
+	ELSE 
+	  IF (qv > 0) THEN 
+	    qv := qv - 1;
+          ELSIF qv = 0 THEN
+	    tc <= '1';
+	  END IF;
 	END IF;
-    END IF;
-
-    IF Clock_decre 'EVENT AND Clock_decre = '1' AND qv = 0 THEN
-      tc <= '1';
     END IF;
 
     Q_decre <= qv;
