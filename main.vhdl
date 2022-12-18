@@ -70,7 +70,7 @@ BEGIN
   n2 <= (not(b1) and not(b2) and b3 and BtnTime) or (not(b1) and b2 and not(b3)) or (not(b1) and b2 and b3 and not(RegTemp_END));
   n3 <= (not(b1) and not(b2) and not(b3)) or (not(b1) and b2 and not(b3) and BtnOn and CDoor) or (not(b1) and b2 and b3 and not(RegTemp_END)) or (b1 and not(b2) and not(b3) and CDoor);
 
-  u1 : decrementador12 port map(data_decre => Q_data_Time, Clock_decre => Clock, load => Load,tc => end_decrementador, Q_decre => Q_decrementador);
+  u1 : decrementador12 port map(data_decre => data_Time, Clock_decre => Clock, load => Load,tc => end_decrementador, Q_decre => Q_decrementador);
 
   --PROCESS (Clock)
   --BEGIN
