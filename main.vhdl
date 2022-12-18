@@ -10,6 +10,7 @@ ENTITY main IS
   Clock : IN BIT;
   b1, b2, b3 : IN BIT;
   RegTemp_END : IN BIT;
+  Load : IN BIT;
   n1, n2, n3 : OUT BIT;
   RegTemp_C : OUT BIT;
   RegTemp_L : OUT BIT;
@@ -46,6 +47,7 @@ component decrementador12 is
   port(
     data_decre : IN INTEGER RANGE 3599 DOWNTO 0;
     Clock_decre : IN BIT;
+    load : IN BIT;
     tc : OUT BIT;
     Q_decre : OUT INTEGER RANGE 3599 DOWNTO 0
   );
@@ -68,23 +70,23 @@ BEGIN
   n2 <= (not(b1) and not(b2) and b3 and BtnTime) or (not(b1) and b2 and not(b3)) or (not(b1) and b2 and b3 and not(RegTemp_END));
   n3 <= (not(b1) and not(b2) and not(b3)) or (not(b1) and b2 and not(b3) and BtnOn and CDoor) or (not(b1) and b2 and b3 and not(RegTemp_END)) or (b1 and not(b2) and not(b3) and CDoor);
 
-  PROCESS (Clock)
-  BEGIN
-    IF Clock 'EVENT AND Clock = '1' THEN     
+  --PROCESS (Clock)
+  --BEGIN
+    --IF Clock 'EVENT AND Clock = '1' THEN     
       --in_regEstados(0) <= n3;
       --in_regEstados(1) <= n2;
       --in_regEstados(2) <= n1;
 
-      u1 : RegTemp port map(data_RegTemp => data_Time, RegTemp_Clear => RegTemp_C, Clock_RegTemp => Clock, Q_RegTemp => Q_data_Time, RegTemp_Load => RegTemp_L);
-      u2 : comparador12 port map(data_comp => Q_data_Time, RegTemp_END_comp => RegTemp_END);
-      u3 : RegEstados port map(data_estados => in_regEstados, Clock_estados => Clock, Q_estados => Q_regEstados);
-      u4 : decrementador12 port map(data_decre => Q_data_Time, Clock_decre => Clock, tc => end_decrementador, Q_decre => Q_decrementador);
+      --u1 : RegTemp port map(data_RegTemp => data_Time, RegTemp_Clear => RegTemp_C, Clock_RegTemp => Clock, Q_RegTemp => Q_data_Time, RegTemp_Load => RegTemp_L);
+     -- u2 : comparador12 port map(data_comp => Q_data_Time, RegTemp_END_comp => RegTemp_END);
+      --u3 : RegEstados port map(data_estados => in_regEstados, Clock_estados => Clock, Q_estados => Q_regEstados);
+      --u4 : decrementador12 port map(data_decre => Q_data_Time, Clock_decre => Clock, tc => end_decrementador, Q_decre => Q_decrementador);
 
-      data_Time => Q_decrementador;
+     -- data_Time => Q_decrementador;
       --b1 => Q_regEstados(3); 
       --b2 => Q_regEstados(2);
       --b3 => Q_regEstados(1);
-    END IF;
-  END PROCESS;
+    --END IF;
+  --END PROCESS;
 
 END Behavior ;
