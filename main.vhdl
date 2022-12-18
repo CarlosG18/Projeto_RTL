@@ -75,7 +75,7 @@ BEGIN
       --in_regEstados(1) <= n2;
       --in_regEstados(2) <= n1;
 
-      u1 : RegTemp port map(data_RegTemp => data_Time, RegTemp_Clear => RegTemp_L, Clock_RegTemp => Clock, Q_RegTemp => Q_data_Time, RegTemp_Load => RegTemp_C);
+      u1 : RegTemp port map(data_RegTemp => data_Time, RegTemp_Clear => RegTemp_C, Clock_RegTemp => Clock, Q_RegTemp => Q_data_Time, RegTemp_Load => RegTemp_L);
       u2 : comparador12 port map(data_comp => Q_data_Time, RegTemp_END_comp => RegTemp_END);
       u3 : RegEstados port map(data_estados => in_regEstados, Clock_estados => Clock, Q_estados => Q_regEstados);
       u4 : decrementador12 port map(data_decre => Q_data_Time, Clock_decre => Clock, tc => end_decrementador, Q_decre => Q_decrementador);
