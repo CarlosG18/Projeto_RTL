@@ -71,9 +71,9 @@ BEGIN
   PROCESS (Clock)
   BEGIN
     IF Clock 'EVENT AND Clock = '1' THEN     
-      in_regEstados(0) <= n3;
-      in_regEstados(1) <= n2;
-      in_regEstados(2) <= n1;
+      --in_regEstados(0) <= n3;
+      --in_regEstados(1) <= n2;
+      --in_regEstados(2) <= n1;
 
       u1 : RegTemp port map(data_RegTemp => data_Time, RegTemp_Clear => RegTemp_L, Clock_RegTemp => Clock, Q_RegTemp => Q_data_Time, RegTemp_Load => RegTemp_C);
       u2 : comparador12 port map(data_comp => Q_data_Time, RegTemp_END_comp => RegTemp_END);
