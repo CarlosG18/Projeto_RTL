@@ -15,7 +15,7 @@ SIGNAL p: STD_LOGIC_VECTOR(11 downto 0);
 BEGIN
   PROCESS ( RegTemp_Clear, Clock_RegTemp, RegTemp_Load)
   BEGIN
-    IF Clock_RegTemp'EVENT AND Clock_RegTemp = '1' AND RegTemp_Clear = '0' THEN
+    IF Clock_RegTemp'EVENT AND Clock_RegTemp = '1' AND RegTemp_Clear = '1' THEN
       Q_RegTemp <= "000000000000" ;
 	 END IF;
     IF Clock_RegTemp'EVENT AND Clock_RegTemp = '1' AND RegTemp_Load = '1' THEN 
