@@ -4,20 +4,23 @@ USE ieee.std_logic_1164.all ;
 ENTITY RegEstados IS                   
 PORT (                        
   data_estados : IN STD_LOGIC_VECTOR(2 downto 0);
-  RegEstados_C, Clock_estados: IN STD_LOGIC ;
-  RegEstados_L : IN BIT
-  Q_estados : OUT STD_LOGIC_VECTOR(2 downto 0);
+  Clock_estados: IN STD_LOGIC ;
+  Q_estados : OUT STD_LOGIC_VECTOR(2 downto 0)
   ) ;
 END RegEstados;                             
 
 ARCHITECTURE Behavior OF RegEstados IS 
+signal p: STD_LOGIC_VECTOR(2 downto 0);
 BEGIN                               
-  PROCESS ( RegEstados_C, Clock_estados, RegEstados_L)
+  PROCESS (Clock_estados)
   BEGIN
-    IF RegEstados_C = '0' THEN
-      Q <= "000" ;
-    ELSIF Clock_estados 'EVENT AND Clock_estados = '1' AND RegEstados_L = '1' THEN 
-      Q <= data_estados;
+    IF Clock_estados 'EVENT AND Clock_estados = '1' THEN
+      Q_estados <= "000" ;
+	 END IF;
+    IF Clock_estados 'EVENT AND Clock_estados = '1' THEN 
+      p <= data_estados;
     END IF ;
+	 Q_estados <= p;
+	 
   END PROCESS ;
 END Behavior ;

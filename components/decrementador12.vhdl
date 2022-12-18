@@ -6,14 +6,14 @@ ENTITY decrementador12 IS
     data_decre : IN INTEGER RANGE 3599 DOWNTO 0;
     Clock_decre : IN BIT;
     tc : OUT BIT;
-    Q_decre : OUT INTEGER RANGE 3599 DOWNTO 0;
+    Q_decre : OUT INTEGER RANGE 3599 DOWNTO 0
   );
 END decrementador12;
 
 ARCHITECTURE comportamento OF decrementador12 IS
 BEGIN
   PROCESS (data_decre, Clock_decre)
-  VARIABLE qv :IN INTEGER RANGE 3599 DOWNTO 0;
+  VARIABLE qv : INTEGER RANGE 3599 DOWNTO 0;
   BEGIN
     IF Clock_decre 'EVENT AND Clock_decre = '1' THEN
       qv := data_decre;

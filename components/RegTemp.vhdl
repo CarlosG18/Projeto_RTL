@@ -11,13 +11,16 @@ ENTITY RegTemp IS
 END RegTemp ;
 
 ARCHITECTURE Behavior OF RegTemp IS
+SIGNAL p: STD_LOGIC_VECTOR(11 downto 0);
 BEGIN
   PROCESS ( RegTemp_Clear, Clock_RegTemp, RegTemp_Load)
   BEGIN
-    IF RegTemp_Clear = '0' THEN
+    IF Clock_RegTemp'EVENT AND Clock_RegTemp = '1' AND RegTemp_Clear = '0' THEN
       Q_RegTemp <= "000000000000" ;
-    ELSIF Clock_RegTemp'EVENT AND Clock_RegTemp = '1' AND RegTemp_Load = '1' THEN 
-      Q_RegTemp <= data_RegTemp;
+	 END IF;
+    IF Clock_RegTemp'EVENT AND Clock_RegTemp = '1' AND RegTemp_Load = '1' THEN 
+      p <= data_RegTemp;
     END IF ;
+	 Q_RegTemp <= P;
   END PROCESS ;
 END Behavior ;

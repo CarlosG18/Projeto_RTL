@@ -12,7 +12,7 @@ ARCHITECTURE Behavior OF comparador12 IS
 BEGIN
   PROCESS ( data_comp )
   BEGIN
-    IF data_comp = '000000000000' THEN
+    IF data_comp = "000000000000" THEN
       RegTemp_END_comp  <= '1';
     ELSE
       RegTemp_END_comp <= '0';
