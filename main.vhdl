@@ -81,9 +81,9 @@ BEGIN
       u4 : decrementador12 port map(data_decre => Q_data_Time, Clock_decre => Clock, tc => end_decrementador, Q_decre => Q_decrementador);
 
       data_Time => Q_decrementador;
-      b1 => Q_regEstados(3) 
-      b2 => Q_regEstados(2)
-      b3 => Q_regEstados(1)
+      --b1 => Q_regEstados(3); 
+      --b2 => Q_regEstados(2);
+      --b3 => Q_regEstados(1);
     END IF;
   END PROCESS;
 
