@@ -18,7 +18,7 @@ BEGIN
   BEGIN
     IF Clock_decre 'EVENT AND Clock_decre = '1'AND load = '1'THEN
        qv := data_decre;
-    ELSE
+    ELSIF Clock_decre 'EVENT AND Clock_decre = '1' THEN
        qv := 0;
     END IF;
 
