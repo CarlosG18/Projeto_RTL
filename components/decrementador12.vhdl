@@ -13,21 +13,21 @@ END decrementador12;
 
 ARCHITECTURE comportamento OF decrementador12 IS
 BEGIN
-  PROCESS (data_decre, Clock_decre, load)
+  PROCESS (data_decre, Clock_decre)
   VARIABLE qv : INTEGER RANGE 3599 DOWNTO 0;
   BEGIN
-    IF Clock_decre 'EVENT AND Clock_decre = '1'AND load = '1'THEN
-       qv := data_decre;
-    ELSIF Clock_decre 'EVENT AND Clock_decre = '1' THEN
-       qv := 0;
+    qv := data_decre;
+
+    IF Clock_decre 'EVENT AND Clock_decre = '1' THEN
+	qv := qv - 1;
     END IF;
 
    -- IF Clock_decre 'EVENT AND Clock_decre = '1' THEN
       --qv := qv - 1;
    -- END IF;
-    --IF Clock_decre 'EVENT AND Clock_decre = '1' AND qv = 0 THEN
-     -- tc <= '1';
-   -- END IF;
+    IF Clock_decre 'EVENT AND Clock_decre = '1' AND qv = 0 THEN
+      tc <= '1';
+    END IF;
     Q_decre <= qv;
   END PROCESS;
 END comportamento;
