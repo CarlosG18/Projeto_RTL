@@ -66,8 +66,8 @@ component RegEstados is
 end component;
 
 BEGIN
-  OnMicro <= not(b1) and b2 and b3;
-  OnAlarm <= b1 and not(b2) and not(b3);
+  OnMicro <= not(b1) and b2 and b3 and regtemp_end_aux;
+  OnAlarm <= b1 and not(b2) and not(b3) and CDoor;
   RegTemp_L <= (not(b1) and b3 and BtnTime) or (not(b1) and b2 and b3);
   regtempLoad <= (not(b1) and b3 and BtnTime) or (not(b1) and b2 and b3);
   RegTemp_C <= b1 and not(b2) and not(b3);
