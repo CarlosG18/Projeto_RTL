@@ -26,8 +26,10 @@ BEGIN
 	ELSE 
 	  IF (qv > 0) THEN 
 	    qv := qv - 1;
-          ELSIF qv = 0 THEN
+      ELSIF qv = 0 THEN
 	    tc <= '1';
+	    ELSE
+	    tc <= '0';
 	  END IF;
 	END IF;
     END IF;
