@@ -11,13 +11,13 @@ ENTITY main IS
   Clock : IN BIT;
   b1, b2, b3 : IN BIT;
   --RegTemp_END : OUT BIT;
-  Load : IN BIT;
+  --Load : IN BIT;
   n1, n2, n3 : OUT BIT;
   RegTemp_C : OUT BIT;
   RegTemp_L : OUT BIT;
   OnMicro : OUT BIT;
   OnAlarm : OUT BIT;
-  end_decrementador : OUT BIT;
+  --end_decrementador : OUT BIT;
   --Q_data_Time : OUT STD_LOGIC_VECTOR(11 downto 0)
   Q_data_Time : OUT INTEGER RANGE 3599 DOWNTO 0
   ) ;
@@ -25,6 +25,7 @@ END main ;
 
 ARCHITECTURE Behavior OF main IS
 signal Q_decre : INTEGER RANGE 3599 DOWNTO 0;
+signal Load : BIT;
 signal Q_comp : BIT;
 signal saida_RegTemp:bit;
 signal in_regEstados : STD_LOGIC_VECTOR(2 DOWNTO 0);
@@ -74,8 +75,16 @@ BEGIN
   n1 <= (not(b1) and b2 and b3 and regtemp_end) and (b1 and not(b2) and not(b3) and not(CDoor));
   n2 <= (not(b1) and not(b2) and b3 and BtnTime) or (not(b1) and b2 and not(b3)) or (not(b1) and b2 and b3 and not(regtemp_end));
   n3 <= (not(b1) and not(b2) and not(b3)) or (not(b1) and b2 and not(b3) and BtnOn and CDoor) or (not(b1) and b2 and b3 and not(regtemp_end)) or (b1 and not(b2) and not(b3) and CDoor);
-
-  u1 : decrementador12 port map(data_decre => data_Time, Clock_decre => Clock, load => Load,tc => regtemp_end, Q_decre => Q_data_Time);
+  
+  PROCESS (Load, Clock)
+  BEGIN
+    IF Clock 'EVENT AND Clock = '1' AND (b1 = '0' AND b2 = '0' AND b3 = '1') AND BtnTime = '1' THEN
+      Load <= '1';
+    END IF;
+    IF Load = '1' THEN
+      u1 : decrementador12 port map(data_decre => data_Time, Clock_decre => Clock, load => Load,tc => regtemp_end, Q_decre => Q_data_Time);
+    END IF;
+  END PROCESS;
 
   --u2 : comparador12 port map(data_comp => Q_decre, RegTemp_END_comp => Q_comp);
 
