@@ -8,9 +8,9 @@ ENTITY main IS
   BtnOn : IN BIT;
   CDoor : IN BIT;
   Clock : IN BIT;
+  tc_decre : OUT BIT;
   b1, b2, b3 : IN BIT;
-  --RegTemp_END : OUT BIT;
-  --Load : IN BIT;
+  RegTemp_END : OUT BIT;
   n1, n2, n3 : OUT BIT;
   RegTemp_C : OUT BIT;
   RegTemp_L : OUT BIT;
@@ -82,9 +82,11 @@ BEGIN
   in_decrementador <= saida_RegTemp;
   Load <= regtempLoad;
   
-  u2 : decrementador12 port map(data_decre => in_decrementador, Clock_decre => Clock, load => Load, tc => regtemp_end, Q_decre => Q_data_decre);
+  u2 : decrementador12 port map(data_decre => in_decrementador, Clock_decre => Clock, load => Load, tc => tc_decre, Q_decre => Q_data_decre);
 
-  --u2 : comparador12 port map(data_comp => Q_decre, RegTemp_END_comp => Q_comp);
+  u3 : comparador12 port map(data_comp => Q_decre, RegTemp_END_comp => regtemp_end);
+  
+  RegTemp_END <= regtemp_end;
 
   --RegTemp_END <= Q_comp;
 
