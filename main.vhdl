@@ -9,7 +9,7 @@ ENTITY main IS
   CDoor : IN BIT;
   Clock : IN BIT;
   b1, b2, b3 : IN BIT;
-  RegTemp_END : OUT BIT;
+  --RegTemp_END : OUT BIT;
   --Load : IN BIT;
   n1, n2, n3 : OUT BIT;
   RegTemp_C : OUT BIT;
@@ -25,7 +25,7 @@ ARCHITECTURE Behavior OF main IS
 signal Q_decre : INTEGER RANGE 3599 DOWNTO 0;
 signal Load : BIT;
 signal Q_comp : BIT;
-signal saida_RegTemp:bit;
+signal saida_RegTemp:INTEGER RANGE 3599 DOWNTO 0;
 signal regtemp_end : BIT;
 signal in_decrementador :INTEGER RANGE 3599 DOWNTO 0;
 signal regtempLoad : BIT;
@@ -76,9 +76,10 @@ BEGIN
   n2 <= (not(b1) and not(b2) and b3 and BtnTime) or (not(b1) and b2 and not(b3)) or (not(b1) and b2 and b3 and not(regtemp_end));
   n3 <= (not(b1) and not(b2) and not(b3)) or (not(b1) and b2 and not(b3) and BtnOn and CDoor) or (not(b1) and b2 and b3 and not(regtemp_end)) or (b1 and not(b2) and not(b3) and CDoor);
   
-  u1 : RegTemp port map(data_RegTemp => data_Time, RegTemp_Clear => regtempClear, Clock_RegTemp => Clock, Q_RegTemp => Q_data_Time, RegTemp_Load => regtempLoad);
+  u1 : RegTemp port map(data_RegTemp => data_Time, RegTemp_Clear => regtempClear, Clock_RegTemp => Clock, Q_RegTemp => saida_RegTemp, RegTemp_Load => regtempLoad);
   
-  in_decrementador <= Q_data_Time;
+  Q_data_Time <= saida_RegTemp;
+  in_decrementador <= saida_RegTemp;
   
   u2 : decrementador12 port map(data_decre => in_decrementador, Clock_decre => Clock, load => Load, tc => regtemp_end, Q_decre => Q_data_decre);
 
