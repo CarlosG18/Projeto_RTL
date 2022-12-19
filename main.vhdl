@@ -26,7 +26,7 @@ signal Q_decre : INTEGER RANGE 3599 DOWNTO 0;
 signal Load : BIT;
 signal Q_comp : BIT;
 signal saida_RegTemp:INTEGER RANGE 3599 DOWNTO 0;
-signal regtemp_end : BIT;
+signal regtemp_end_aux : BIT;
 signal in_decrementador :INTEGER RANGE 3599 DOWNTO 0;
 signal regtempLoad : BIT;
 signal regtempClear : BIT;
@@ -72,9 +72,9 @@ BEGIN
   regtempLoad <= (not(b1) and b3 and BtnTime) or (not(b1) and b2 and b3);
   RegTemp_C <= b1 and not(b2) and not(b3);
   regtempClear <= b1 and not(b2) and not(b3);
-  n1 <= (not(b1) and b2 and b3 and regtemp_end) and (b1 and not(b2) and not(b3) and not(CDoor));
-  n2 <= (not(b1) and not(b2) and b3 and BtnTime) or (not(b1) and b2 and not(b3)) or (not(b1) and b2 and b3 and not(regtemp_end));
-  n3 <= (not(b1) and not(b2) and not(b3)) or (not(b1) and b2 and not(b3) and BtnOn and CDoor) or (not(b1) and b2 and b3 and not(regtemp_end)) or (b1 and not(b2) and not(b3) and CDoor);
+  n1 <= (not(b1) and b2 and b3 and regtemp_end_aux) and (b1 and not(b2) and not(b3) and not(CDoor));
+  n2 <= (not(b1) and not(b2) and b3 and BtnTime) or (not(b1) and b2 and not(b3)) or (not(b1) and b2 and b3 and not(regtemp_end_aux));
+  n3 <= (not(b1) and not(b2) and not(b3)) or (not(b1) and b2 and not(b3) and BtnOn and CDoor) or (not(b1) and b2 and b3 and not(regtemp_end_aux)) or (b1 and not(b2) and not(b3) and CDoor);
   
   u1 : RegTemp port map(data_RegTemp => data_Time, RegTemp_Clear => regtempClear, Clock_RegTemp => Clock, Q_RegTemp => saida_RegTemp, RegTemp_Load => regtempLoad);
   
@@ -84,9 +84,9 @@ BEGIN
   
   u2 : decrementador12 port map(data_decre => in_decrementador, Clock_decre => Clock, load => Load, tc => tc_decre, Q_decre => Q_data_decre);
 
-  u3 : comparador12 port map(data_comp => Q_decre, RegTemp_END_comp => regtemp_end);
+  u3 : comparador12 port map(data_comp => Q_decre, RegTemp_END_comp => regtemp_end_aux);
   
-  RegTemp_END <= regtemp_end;
+  RegTemp_END <= regtemp_end_aux;
 
   --RegTemp_END <= Q_comp;
 
