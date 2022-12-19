@@ -43,9 +43,9 @@ end component;
 
 component RegTemp is
   port(
-    data_RegTemp : IN STD_LOGIC_VECTOR(11 downto 0) ;
-    RegTemp_Clear, Clock_RegTemp: IN STD_LOGIC ;  
-    Q_RegTemp : OUT STD_LOGIC_VECTOR(11 downto 0);              
+    data_RegTemp : IN INTEGER RANGE 3599 DOWNTO 0;
+    RegTemp_Clear, Clock_RegTemp: IN BIT;  
+    Q_RegTemp : OUT INTEGER RANGE 3599 DOWNTO 0;
     RegTemp_Load : IN BIT
   );
 end component;
