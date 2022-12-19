@@ -3,7 +3,8 @@ USE ieee.std_logic_1164.all ;
 
 ENTITY main IS
   PORT ( 
-  data_Time : IN STD_LOGIC_VECTOR(11 downto 0) ;
+  --data_Time : IN STD_LOGIC_VECTOR(11 downto 0) ;
+  data_Time : IN INTEGER RANGE 3599 DOWNTO 0;
   BtnTime : IN BIT;
   BtnOn : IN BIT;
   CDoor : IN BIT;
@@ -17,14 +18,15 @@ ENTITY main IS
   OnMicro : OUT BIT;
   OnAlarm : OUT BIT;
   end_decrementador : OUT BIT;
-  Q_data_Time : OUT STD_LOGIC_VECTOR(11 downto 0)
+  --Q_data_Time : OUT STD_LOGIC_VECTOR(11 downto 0)
+  Q_data_Time : OUT INTEGER RANGE 3599 DOWNTO 0
   ) ;
 END main ;
 
 ARCHITECTURE Behavior OF main IS
 signal saida_RegTemp:bit;
 signal in_regEstados : STD_LOGIC_VECTOR(2 DOWNTO 0);
-signal Q_decrementador : STD_LOGIC_VECTOR(11 downto 0);
+--signal Q_decrementador : STD_LOGIC_VECTOR(11 downto 0);
 signal Q_regEstados : STD_LOGIC_VECTOR(2 DOWNTO 0);
 
 component comparador12 is 
@@ -70,7 +72,7 @@ BEGIN
   n2 <= (not(b1) and not(b2) and b3 and BtnTime) or (not(b1) and b2 and not(b3)) or (not(b1) and b2 and b3 and not(RegTemp_END));
   n3 <= (not(b1) and not(b2) and not(b3)) or (not(b1) and b2 and not(b3) and BtnOn and CDoor) or (not(b1) and b2 and b3 and not(RegTemp_END)) or (b1 and not(b2) and not(b3) and CDoor);
 
-  u1 : decrementador12 port map(data_decre => data_Time, Clock_decre => Clock, load => Load,tc => end_decrementador, Q_decre => Q_decrementador);
+  u1 : decrementador12 port map(data_decre => data_Time, Clock_decre => Clock, load => Load,tc => end_decrementador, Q_decre => Q_data_Time);
 
   --PROCESS (Clock)
   --BEGIN
