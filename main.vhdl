@@ -24,7 +24,7 @@ ENTITY main IS
 END main ;
 
 ARCHITECTURE Behavior OF main IS
-signal Q_decre : INTEGER RANGE 3599 DOWNTO 0);
+signal Q_decre : INTEGER RANGE 3599 DOWNTO 0;
 signal saida_RegTemp:bit;
 signal in_regEstados : STD_LOGIC_VECTOR(2 DOWNTO 0);
 --signal Q_decrementador : STD_LOGIC_VECTOR(11 downto 0);
