@@ -25,6 +25,7 @@ END main ;
 
 ARCHITECTURE Behavior OF main IS
 signal Q_decre : INTEGER RANGE 3599 DOWNTO 0;
+signal Q_comp : BIT;
 signal saida_RegTemp:bit;
 signal in_regEstados : STD_LOGIC_VECTOR(2 DOWNTO 0);
 --signal Q_decrementador : STD_LOGIC_VECTOR(11 downto 0);
@@ -75,7 +76,9 @@ BEGIN
 
   u1 : decrementador12 port map(data_decre => data_Time, Clock_decre => Clock, load => Load,tc => end_decrementador, Q_decre => Q_decre);
 
-  u2 : comparador12 port map(data_comp => Q_decre, RegTemp_END_comp => RegTemp_END);
+  u2 : comparador12 port map(data_comp => Q_decre, RegTemp_END_comp => Q_comp);
+
+  RegTemp_END <= Q_comp;
 
   --PROCESS (Clock)
   --BEGIN
