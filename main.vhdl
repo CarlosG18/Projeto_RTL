@@ -10,7 +10,7 @@ ENTITY main IS
   CDoor : IN BIT;
   Clock : IN BIT;
   b1, b2, b3 : IN BIT;
-  RegTemp_END : IN BIT;
+  RegTemp_END : OUT BIT;
   Load : IN BIT;
   n1, n2, n3 : OUT BIT;
   RegTemp_C : OUT BIT;
