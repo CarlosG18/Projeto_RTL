@@ -80,6 +80,7 @@ BEGIN
   
   Q_data_Time <= saida_RegTemp;
   in_decrementador <= saida_RegTemp;
+  Load <= regtempLoad;
   
   u2 : decrementador12 port map(data_decre => in_decrementador, Clock_decre => Clock, load => Load, tc => regtemp_end, Q_decre => Q_data_decre);
 
