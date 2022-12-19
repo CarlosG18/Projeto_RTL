@@ -3,7 +3,6 @@ USE ieee.std_logic_1164.all ;
 
 ENTITY main IS
   PORT ( 
-  --data_Time : IN STD_LOGIC_VECTOR(11 downto 0) ;
   data_Time : IN INTEGER RANGE 3599 DOWNTO 0;
   BtnTime : IN BIT;
   BtnOn : IN BIT;
@@ -32,6 +31,8 @@ signal in_regEstados : STD_LOGIC_VECTOR(2 DOWNTO 0);
 signal regtemp_end : BIT;
 --signal Q_decrementador : STD_LOGIC_VECTOR(11 downto 0);
 signal Q_regEstados : STD_LOGIC_VECTOR(2 DOWNTO 0);
+signal regtempLoad : BIT;
+signal regtempClear : BIT;
 
 component comparador12 is 
   port(
@@ -71,20 +72,16 @@ BEGIN
   OnMicro <= not(b1) and b2 and b3;
   OnAlarm <= b1 and not(b2) and not(b3);
   RegTemp_L <= (not(b1) and b3 and BtnTime) or (not(b1) and b2 and b3);
+  regtempLoad <= (not(b1) and b3 and BtnTime) or (not(b1) and b2 and b3);
   RegTemp_C <= b1 and not(b2) and not(b3);
+  regtempClear <= b1 and not(b2) and not(b3);
   n1 <= (not(b1) and b2 and b3 and regtemp_end) and (b1 and not(b2) and not(b3) and not(CDoor));
   n2 <= (not(b1) and not(b2) and b3 and BtnTime) or (not(b1) and b2 and not(b3)) or (not(b1) and b2 and b3 and not(regtemp_end));
   n3 <= (not(b1) and not(b2) and not(b3)) or (not(b1) and b2 and not(b3) and BtnOn and CDoor) or (not(b1) and b2 and b3 and not(regtemp_end)) or (b1 and not(b2) and not(b3) and CDoor);
   
-  PROCESS (Load, Clock)
-  BEGIN
-    IF Clock 'EVENT AND Clock = '1' AND (b1 = '0' AND b2 = '0' AND b3 = '1') AND BtnTime = '1' THEN
-      Load <= '1';
-    END IF;
-    IF Load = '1' THEN
-      u1 : decrementador12 port map(data_decre => data_Time, Clock_decre => Clock, load => Load,tc => regtemp_end, Q_decre => Q_data_Time);
-    END IF;
-  END PROCESS;
+u1 : RegTemp port map(data_RegTemp => data_Time, RegTemp_Clear => regtempClear, Clock_RegTemp => Clock, Q_RegTemp => Q_data_Time, RegTemp_Load => regtempLoad);
+  
+  --u1 : decrementador12 port map(data_decre => data_Time, Clock_decre => Clock, load => Load,tc => regtemp_end, Q_decre => Q_data_Time);
 
   --u2 : comparador12 port map(data_comp => Q_decre, RegTemp_END_comp => Q_comp);
 
