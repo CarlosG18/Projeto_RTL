@@ -16,6 +16,7 @@ ENTITY main IS
   RegTemp_L : OUT BIT;
   OnMicro : OUT BIT;
   OnAlarm : OUT BIT;
+  On_decre : OUT BIT;
   Q_data_decre : OUT INTEGER RANGE 3599 DOWNTO 0;
   Q_data_Time : OUT INTEGER RANGE 3599 DOWNTO 0
   ) ;
@@ -30,6 +31,7 @@ signal regtemp_end_aux : BIT;
 signal in_decrementador :INTEGER RANGE 3599 DOWNTO 0;
 signal regtempLoad : BIT;
 signal regtempClear : BIT;
+signal On_decre_aux : BIT;
 
 component comparador12 is 
   port(
@@ -66,21 +68,24 @@ component RegEstados is
 end component;
 
 BEGIN
-  OnMicro <= not(b1) and b2 and b3 and not(regtemp_end_aux);
-  OnAlarm <= b1 and not(b2) and not(b3) and CDoor;
-  RegTemp_L <= (not(b1) and b3 and BtnTime) or (not(b1) and b2 and b3);
-  regtempLoad <= (not(b1) and b3 and BtnTime) or (not(b1) and b2 and b3);
+  OnMicro <= not(b1) and b2 and b3;
+  OnAlarm <=(b1 and not(b2) and not(b3) and not(CDoor)) or (b1 and not(b2) and not(b3) and CDoor);
+  RegTemp_L <= (not(b1) and not(b2) and b3 and not(BtnTime)) or (not(b1) and not(b2) and b3 and BtnTime);
+  regtempLoad <=(not(b1) and not(b2) and b3 and not(BtnTime)) or (not(b1) and not(b2) and b3 and BtnTime);
   RegTemp_C <= b1 and not(b2) and not(b3);
   regtempClear <= b1 and not(b2) and not(b3);
   n1 <= (not(b1) and b2 and b3 and regtemp_end_aux) and (b1 and not(b2) and not(b3) and not(CDoor));
   n2 <= (not(b1) and not(b2) and b3 and BtnTime) or (not(b1) and b2 and not(b3)) or (not(b1) and b2 and b3 and not(regtemp_end_aux));
   n3 <= (not(b1) and not(b2) and not(b3)) or (not(b1) and b2 and not(b3) and BtnOn and CDoor) or (not(b1) and b2 and b3 and not(regtemp_end_aux)) or (b1 and not(b2) and not(b3) and CDoor);
+  On_decre <=(not(b1) and b2 and b3 and not(regtemp_end_aux)) or (not(b1) and b2 and b3 and regtemp_end_aux);
+  On_decre_aux <= (b1 and not(b2) and not(b3) and not(CDoor)) or (b1 and not(b2) and not(b3) and CDoor);
+  
   
   u1 : RegTemp port map(data_RegTemp => data_Time, RegTemp_Clear => regtempClear, Clock_RegTemp => Clock, Q_RegTemp => saida_RegTemp, RegTemp_Load => regtempLoad);
   
   Q_data_Time <= saida_RegTemp;
   in_decrementador <= saida_RegTemp;
-  Load <= regtempLoad;
+  Load <= On_decre_aux;
   
   u2 : decrementador12 port map(data_decre => in_decrementador, Clock_decre => Clock, load => Load, tc => tc_decre, Q_decre => Q_decre_aux);
   
@@ -89,26 +94,5 @@ BEGIN
   u3 : comparador12 port map(data_comp => Q_decre_aux, RegTemp_END_comp => regtemp_end_aux);
   
   RegTemp_END <= regtemp_end_aux;
-
-  --RegTemp_END <= Q_comp;
-
-  --PROCESS (Clock)
-  --BEGIN
-    --IF Clock 'EVENT AND Clock = '1' THEN     
-      --in_regEstados(0) <= n3;
-      --in_regEstados(1) <= n2;
-      --in_regEstados(2) <= n1;
-
-      --u1 : RegTemp port map(data_RegTemp => data_Time, RegTemp_Clear => RegTemp_C, Clock_RegTemp => Clock, Q_RegTemp => Q_data_Time, RegTemp_Load => RegTemp_L);
-     -- u2 : comparador12 port map(data_comp => Q_data_Time, RegTemp_END_comp => RegTemp_END);
-      --u3 : RegEstados port map(data_estados => in_regEstados, Clock_estados => Clock, Q_estados => Q_regEstados);
-      --u4 : decrementador12 port map(data_decre => Q_data_Time, Clock_decre => Clock, tc => end_decrementador, Q_decre => Q_decrementador);
-
-     -- data_Time => Q_decrementador;
-      --b1 => Q_regEstados(3); 
-      --b2 => Q_regEstados(2);
-      --b3 => Q_regEstados(1);
-    --END IF;
-  --END PROCESS;
 
 END Behavior ;
