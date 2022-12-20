@@ -17,13 +17,13 @@ ARCHITECTURE comportamento OF decrementador12 IS
 BEGIN
   PROCESS (data_decre, Clock_decre, load)
   VARIABLE qv : INTEGER RANGE 3599 DOWNTO 0;
-  VARIABLE cont : bit := '0';
+  VARIABLE cont : INTEGER RANGE 2 DOWNTO 0 := 0;
   BEGIN
 
     IF Clock_decre 'EVENT AND Clock_decre = '1' THEN
-	IF load = '1' and bit = '0' THEN
+	IF load = '1' and bit = 0 THEN
 	  qv := data_decre;
-	  bit <= '1';
+	  bit := 1;
 	ELSE 
 	  IF (qv > 0) THEN 
 	    qv := qv - 1;
