@@ -18,7 +18,7 @@ signal load_aux : bit;
 BEGIN
   load_aux <= load;
 
-  PROCESS (data_decre, Clock_decre, load)
+  PROCESS (data_decre, Clock_decre, load_aux)
   VARIABLE qv : INTEGER RANGE 3599 DOWNTO 0;
   BEGIN
     IF Clock_decre 'EVENT AND Clock_decre = '1' THEN
