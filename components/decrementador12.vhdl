@@ -14,16 +14,17 @@ ENTITY decrementador12 IS
 END decrementador12;
 
 ARCHITECTURE comportamento OF decrementador12 IS
+signal load_aux : bit;
 BEGIN
   PROCESS (data_decre, Clock_decre, load)
   VARIABLE qv : INTEGER RANGE 3599 DOWNTO 0;
-  VARIABLE cont : INTEGER RANGE 2 DOWNTO 0 := 0;
   BEGIN
+    load_aux <= load;
 
     IF Clock_decre 'EVENT AND Clock_decre = '1' THEN
-	IF load = '1' and bit = 0 THEN
+	IF load_aux = '1' THEN
 	  qv := data_decre;
-	  bit := 1;
+	  load_aux <= '0';
 	ELSE 
 	  IF (qv > 0) THEN 
 	    qv := qv - 1;
