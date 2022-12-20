@@ -16,11 +16,11 @@ END decrementador12;
 ARCHITECTURE comportamento OF decrementador12 IS
 signal load_aux : bit;
 BEGIN
+  load_aux <= load;
+
   PROCESS (data_decre, Clock_decre, load)
   VARIABLE qv : INTEGER RANGE 3599 DOWNTO 0;
   BEGIN
-    load_aux <= load;
-
     IF Clock_decre 'EVENT AND Clock_decre = '1' THEN
 	IF load_aux = '1' THEN
 	  qv := data_decre;
