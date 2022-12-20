@@ -24,7 +24,7 @@ BEGIN
     IF Clock_decre 'EVENT AND Clock_decre = '1' THEN
 	IF load_aux = '1' THEN
 	  qv := data_decre;
-	  load_aux <= '0';
+	  --load_aux <= '0';
 	ELSE 
 	  IF (qv > 0) THEN 
 	    qv := qv - 1;
