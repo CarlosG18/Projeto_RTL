@@ -49,7 +49,6 @@ begin
 
     u1 : BlocoDeControle port map (clk, rst, BtnTime, BtnTime, CDoor, onAlarm, onMicro, reg_showtime_clr, reg_showtime_ld, decre_load,
     reg_showtime_END);
-    u2 : BlocoOperacional port map (clk, reg_showtime_clr, reg_showtime_ld,
-    decre_load, reg_showtime_END, Show_time);
+    u2 : BlocoOperacional port map (clk, Data_time, reg_showtime_clr, reg_showtime_ld, decre_load, reg_showtime_END, Show_time);
 
 end comportamento ;
