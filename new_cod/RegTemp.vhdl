@@ -17,7 +17,7 @@ BEGIN
   PROCESS ( reg_showtime_clear, Clock_Reg_showtime, reg_showtime_load)
   BEGIN
     IF Clock_Reg_showtime'EVENT AND Clock_Reg_showtime = '1' AND reg_showtime_clear = '1' THEN
-      p <= 0;
+      p <= "000000000000";
     ELSIF Clock_Reg_showtime'EVENT AND Clock_Reg_showtime = '1' AND reg_showtime_load = '1' THEN 
       p <= data_Reg_showtime;
     END IF ;

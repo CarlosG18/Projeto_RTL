@@ -1,5 +1,6 @@
 LIBRARY ieee ;
 USE ieee.std_logic_1164.all ;
+use ieee.std_logic_arith.all;
 
 ENTITY comparador12 IS
   PORT ( 
