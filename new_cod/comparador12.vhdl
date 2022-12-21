@@ -4,7 +4,7 @@ use ieee.std_logic_arith.all;
 
 ENTITY comparador12 IS
   PORT ( 
-    data_comp : IN unsigned(12 downto 0);
+    data_comp : IN unsigned(11 downto 0);
     Reg_showtime_END_comp : OUT std_logic
   ) ;
 END comparador12 ;

@@ -10,8 +10,8 @@ entity main is
         CDoor : IN std_logic;
         onAlarm : OUT std_logic;
         onMicro : OUT std_logic;
-        Data_time : IN unsigned(12 downto 0);
-        Show_time: OUT unsigned (12 downto 0)
+        Data_time : IN unsigned(11 downto 0);
+        Show_time: OUT unsigned (11 downto 0)
     );
 end main;
 
@@ -33,11 +33,11 @@ architecture comportamento of main is
     component BlocoOperacional
         port(
             clk : in std_logic;
-            data_time : IN unsigned(12 downto 0);
+            data_time : IN unsigned(11 downto 0);
             reg_showtime_clr, reg_showtime_ld : in std_logic;
             decre_load : in std_logic;
             reg_showtime_END : out std_logic;
-            Show_time: OUT unsigned (12 downto 0)
+            Show_time: OUT unsigned (11 downto 0)
         );
     end component;
 

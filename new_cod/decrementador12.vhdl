@@ -4,20 +4,20 @@ use ieee.std_logic_arith.all;
 
 ENTITY decrementador12 IS
   PORT(
-   data_decre : IN unsigned(12 downto 0);
+   data_decre : IN unsigned(11 downto 0);
     Clock_decre : IN std_logic;
     load : IN std_logic;
-    Q_decre : OUT unsigned(12 downto 0)
+    Q_decre : OUT unsigned(11 downto 0)
   );
 END decrementador12;
 
 ARCHITECTURE comportamento OF decrementador12 IS
-signal load_aux : bit;
+signal load_aux : std_logic;
 BEGIN
   load_aux <= load;
 
   PROCESS (data_decre, Clock_decre, load_aux)
-  VARIABLE qv : unsigned(12 downto 0);
+  VARIABLE qv : unsigned(11 downto 0);
   BEGIN
     IF Clock_decre 'EVENT AND Clock_decre = '1' THEN
 	    IF load_aux = '1' THEN

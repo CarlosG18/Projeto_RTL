@@ -4,15 +4,15 @@ use ieee.std_logic_arith.all;
 
 ENTITY Reg_showtime IS
   PORT ( 
-    data_Reg_showtime : IN unsigned(12 downto 0);
+    data_Reg_showtime : IN unsigned(11 downto 0);
     reg_showtime_clear, Clock_Reg_showtime: IN std_logic;  
-    Q_Reg_showtime : OUT unsigned(12 downto 0);
+    Q_Reg_showtime : OUT unsigned(11 downto 0);
     reg_showtime_load : IN std_logic
   ) ;
 END RegTemp ;
 
 ARCHITECTURE Behavior OF reg_showtime IS
-SIGNAL p: unsigned(12 downto 0);
+SIGNAL p: unsigned(11 downto 0);
 BEGIN
   PROCESS ( reg_showtime_clear, Clock_Reg_showtime, reg_showtime_load)
   BEGIN
