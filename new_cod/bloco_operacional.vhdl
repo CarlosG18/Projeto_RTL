@@ -33,8 +33,8 @@ end component;
 component decrementador12 is
   port(
     data_decre : IN unsigned(12 downto 0);
-    Clock_decre : IN BIT;
-    load : IN BIT;
+    Clock_decre : IN std_logic;
+    load : IN std_logic;
     Q_decre : OUT unsigned(12 downto 0)
   );
 end component;
