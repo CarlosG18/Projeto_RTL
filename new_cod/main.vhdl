@@ -24,7 +24,7 @@ architecture comportamento of main is
     signal reg_decre : unsigned (12 downto 0);
     --signal tc : std_logic;
 
-    constant u_zero : unsigned (12 downto 0) := "000000000000";
+    constant u_zero : unsigned (12 downto 0) := "0000000000000";
     constant u_um : unsigned (0 downto 0) := "1";
 begin
 
@@ -50,24 +50,24 @@ begin
                     estado <= ESPERA;
                 when ESPERA =>
                     if (BtnOn='1' and CDoor='1') then 
-                        estado <= ONMICRO_;
+                        estado <= ONMICRO1;
                     else
                         estado <= ESPERA;
                     end if;
-                when ONMICRO_ =>
+                when ONMICRO1 =>
                     reg_showtime <= reg_showtime - 1;
                     show_time <= reg_showtime;
                     onMicro <= '1';
                     if (tc='0') then 
-                        estado <= ONMICRO_;
+                        estado <= ONMICRO1;
                     elsif (tc='1') then 
-                        estado <= ONALARM_;
+                        estado <= ONALARM1;
                     end if;
-                when ONALARM_ =>
+                when ONALARM1 =>
                     onAlarm <= '1';
                     reg_showtime <= u_zero;
                     if (CDoor='1') then 
-                        estado <= ONALARM_;
+                        estado <= ONALARM1;
                     else
                         estado <= START;
                     end if;
