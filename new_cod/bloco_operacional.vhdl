@@ -40,11 +40,14 @@ component decrementador12 is
 end component;
 
 signal saida_decre : unsigned(12 downto 0);
+signal saida_time_aux : unsigned(12 downto 0);
 
 begin
 
     decrementador : decrementador12 port map (data_time, clk, decre_load, saida_decre);
     comparar : comparador12 port map (saida_decre, reg_showtime_END);
-    reg_showT : Reg_showtime port map (saida_decre, reg_showtime_clr, clk, Show_time, reg_showtime_ld);
+    reg_showT : Reg_showtime port map (saida_decre, reg_showtime_clr, clk, saida_time_aux, reg_showtime_ld);
+    
+    Show_time <= saida_time_aux;
 
 end comportamento;
