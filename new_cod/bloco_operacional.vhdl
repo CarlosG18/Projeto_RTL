@@ -44,7 +44,7 @@ signal saida_decre : unsigned(12 downto 0);
 begin
 
     decrementador : decrementador12 port map (data_time, clk, decre_load, saida_decre);
-    comparar : comparador port map (saida_decre, reg_showtime_END);
+    comparar : comparador12 port map (saida_decre, reg_showtime_END);
     reg_showT : Reg_showtime port map (saida_decre, reg_showtime_clr, clk, Show_time, reg_showtime_ld);
 
 end comportamento;
