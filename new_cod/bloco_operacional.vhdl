@@ -11,39 +11,41 @@ entity BlocoOperacional is
         reg_showtime_END : out std_logic;
         Show_time: OUT unsigned (12 downto 0)
     );
-end main;
+end BlocoOperacional;
 
 architecture comportamento of BlocoOperacional is
     component comparador12 is 
   port(
-    data_comp : IN INTEGER RANGE 3599 DOWNTO 0;
+    data_comp : IN unsigned(12 downto 0);
     Reg_showtime_END_comp : OUT std_logic
   );
 end component;
 
 component Reg_showtime is
   port(
-    data_Reg_showtime : IN INTEGER RANGE 3599 DOWNTO 0;
-    reg_showtime_clr, Clock_RegTemp: IN std_logic;  
-    Q_Reg_showtime : OUT INTEGER RANGE 3599 DOWNTO 0;
-    reg_showtime_ld : IN std
+    data_Reg_showtime : IN unsigned(12 downto 0);
+    reg_showtime_clear, Clock_RegTemp: IN std_logic;  
+    Q_Reg_showtime : unsigned(12 downto 0);
+    reg_showtime_load : IN std_logic
   );
 end component;
 
 component decrementador12 is
   port(
-    data_decre : IN INTEGER RANGE 3599 DOWNTO 0;
+    data_decre : IN unsigned(12 downto 0);
     Clock_decre : IN BIT;
     load : IN BIT;
-    tc : OUT BIT;
-    Q_decre : OUT INTEGER RANGE 3599 DOWNTO 0
+    --tc : OUT BIT;
+    Q_decre : OUT unsigned(12 downto 0);
   );
 end component;
 
+signal saida_decre : unsigned(12 downto 0);
+
 begin
 
-    decrementador : decrementador12 port map ();
-    reg_showT : Reg_showtime port map ();
-    comparar : comparador port map ();
+    decrementador : decrementador12 port map (data_time, clk, decre_load, saida_decre);
+    comparar : comparador port map (saida_decre, reg_showtime_END);
+    reg_showT : Reg_showtime port map (saida_decre, reg_showtime_clr, clk, Show_time, reg_showtime_ld);
 
 end comportamento;

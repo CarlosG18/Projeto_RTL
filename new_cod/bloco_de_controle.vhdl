@@ -14,7 +14,7 @@ entity BlocoDeControle is
         decre_load : out std_logic;
         reg_showtime_END : in std_logic
     );
-end main;
+end BlocoDeControle;
 
 architecture comportamento of BlocoDeControle is
     type tipoestado is (START, SETS, ESPERA, ONMICRO1, ONALARM1);

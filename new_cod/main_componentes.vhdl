@@ -52,4 +52,4 @@ begin
     u2 : BlocoOperacional port map (clk, reg_showtime_clr, reg_showtime_ld,
     decre_load, reg_showtime_END, Show_time);
 
-end comportamento ; -mainomportamemain
+end comportamento ;
