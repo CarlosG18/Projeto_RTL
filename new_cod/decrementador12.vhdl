@@ -4,8 +4,8 @@ USE ieee.std_logic_1164.all ;
 ENTITY decrementador12 IS
   PORT(
    data_decre : IN unsigned(12 downto 0);
-    Clock_decre : IN BIT;
-    load : IN BIT;
+    Clock_decre : IN std_logic;
+    load : IN std_logic;
     Q_decre : OUT unsigned(12 downto 0)
   );
 END decrementador12;
