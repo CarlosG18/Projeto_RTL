@@ -24,7 +24,7 @@ end component;
 component Reg_showtime is
   port(
     data_Reg_showtime : IN unsigned(12 downto 0);
-    reg_showtime_clear, Clock_RegTemp: IN std_logic;  
+    reg_showtime_clear, Clock_reg_showtime: IN std_logic;  
     Q_Reg_showtime : unsigned(12 downto 0);
     reg_showtime_load : IN std_logic
   );
@@ -35,8 +35,7 @@ component decrementador12 is
     data_decre : IN unsigned(12 downto 0);
     Clock_decre : IN BIT;
     load : IN BIT;
-    --tc : OUT BIT;
-    Q_decre : OUT unsigned(12 downto 0);
+    Q_decre : OUT unsigned(12 downto 0)
   );
 end component;
 

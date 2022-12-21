@@ -3,8 +3,8 @@ USE ieee.std_logic_1164.all ;
 
 ENTITY comparador12 IS
   PORT ( 
-  data_comp : IN INTEGER RANGE 3599 DOWNTO 0;
-  RegTemp_END_comp : OUT BIT
+    data_comp : IN unsigned(12 downto 0);
+    Reg_showtime_END_comp : OUT std_logic
   ) ;
 END comparador12 ;
 
@@ -13,9 +13,9 @@ BEGIN
   PROCESS ( data_comp )
   BEGIN
     IF data_comp = 0 THEN
-      RegTemp_END_comp  <= '1';
+      Reg_showtime_END_comp <= '1';
     ELSE
-      RegTemp_END_comp <= '0';
+      Reg_showtime_END_comp <= '0';
     END IF ;
   END PROCESS ;
 END Behavior ;
