@@ -25,7 +25,7 @@ component Reg_showtime is
   port(
     data_Reg_showtime : IN unsigned(11 downto 0);
     reg_showtime_clear, Clock_reg_showtime: IN std_logic;  
-    Q_Reg_showtime : unsigned(11 downto 0);
+    Q_Reg_showtime : out unsigned(11 downto 0);
     reg_showtime_load : IN std_logic
   );
 end component;
