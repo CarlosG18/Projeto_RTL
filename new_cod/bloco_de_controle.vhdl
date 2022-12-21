@@ -52,7 +52,7 @@ begin
                     end if;
                 when ONMICRO1 =>
                     decre_load <= '1';
-                    show_time <= reg_showtime;
+                    --show_time <= reg_showtime;
                     onMicro <= '1';
                     if (reg_showtime_END='0') then 
                         proximoestado <= ONMICRO1;
