@@ -17,7 +17,7 @@ entity main is
 end main;
 
 architecture comportamento of main is
-    type tipoestado is (START, SETS, ESPERA, ONMICRO, ONALARM);
+    type tipoestado is (START, SETS, ESPERA, ONMICRO_, ONALARM_);
 
     signal estado : tipoestado;
     signal reg_showtime : unsigned (12 downto 0);
@@ -31,48 +31,47 @@ begin
     maquinadeestados : process(clk, rst)
     begin
         if (rst='1') then
-            onMicro <= '0';
-            onAlarm <= '0';
-            reg_showtime <= u_zero;
-            estado <= START;
-            elsif (clk='1' and clk'event) then
-                case estado is
-                    when START =>
-                        onMicro <= '0';
-                        onAlarm <= '0';
-                        if (BtnTime='1') then
-                            estado <= SETS;
-                        else
-                            estado <= START;
-                        end if;
-                    when SETS => 
-                        reg_showtime <= Data_time;
+        onMicro <= '0';
+        onAlarm <= '0';
+        reg_showtime <= u_zero;
+        estado <= START;
+        elsif (clk='1' and clk'event) then
+            case estado is
+                when START =>
+                    onMicro <= '0';
+                    onAlarm <= '0';
+                    if (BtnTime='1') then
+                        estado <= SETS;
+                    else
+                        estado <= START;
+                    end if;
+                when SETS => 
+                    reg_showtime <= Data_time;
+                    estado <= ESPERA;
+                when ESPERA =>
+                    if (BtnOn='1' and CDoor='1') then 
+                        estado <= ONMICRO_;
+                    else
                         estado <= ESPERA;
-                    when ESPERA =>
-                        if (BtnOn='1' and CDoor='1') then 
-                            estado <= ONMICRO;
-                        else
-                            estado <= ESPERA;
-                        end if;
-                    when ONMICRO =>
-                        reg_showtime <= reg_showtime - 1;
-                        show_time <= reg_showtime;
-                        onMicro = '1';
-                        if (tc='0') then 
-                            estado <= ONMICRO;
-                        elsif (tc='1') then 
-                            estado <= ONALARM;
-                        end if;
-                    when ONALARM =>
-                        onAlarm = '1';
-                        reg_showtime = u_zero;
-                        if (CDoor='1') then 
-                            estado <= ONALARM;
-                        else
-                            estado <= START;
-                        end if;
-                end case;
-            end if;
+                    end if;
+                when ONMICRO_ =>
+                    reg_showtime <= reg_showtime - 1;
+                    show_time <= reg_showtime;
+                    onMicro <= '1';
+                    if (tc='0') then 
+                        estado <= ONMICRO_;
+                    elsif (tc='1') then 
+                        estado <= ONALARM_;
+                    end if;
+                when ONALARM_ =>
+                    onAlarm <= '1';
+                    reg_showtime <= u_zero;
+                    if (CDoor='1') then 
+                        estado <= ONALARM_;
+                    else
+                        estado <= START;
+                    end if;
+            end case;
         end if;
     end process;        
 end comportamento;
