@@ -12,7 +12,8 @@ entity main is
         onMicro : OUT std_logic;
         tc : IN std_logic;
         Data_time : IN unsigned(12 downto 0);
-        Show_time: OUT unsigned (12 downto 0)
+        Show_time: OUT unsigned (12 downto 0);
+        reg_estados :OUT unsigned (2 downto 0)
     );
 end main;
 
@@ -21,6 +22,7 @@ architecture comportamento of main is
 
     signal estado : tipoestado;
     signal reg_showtime : unsigned (12 downto 0);
+    signal reg_estados :unsigned (2 downto 0);
     signal reg_decre : unsigned (12 downto 0);
     --signal tc : std_logic;
 
@@ -40,21 +42,25 @@ begin
                 when START =>
                     onMicro <= '0';
                     onAlarm <= '0';
+                    reg_estados <= '000';
                     if (BtnTime='1') then
                         estado <= SETS;
                     else
                         estado <= START;
                     end if;
-                when SETS => 
+                when SETS =>
+                    reg_estados <= '001'
                     reg_showtime <= Data_time;
                     estado <= ESPERA;
                 when ESPERA =>
+                    reg_estados <= '010'
                     if (BtnOn='1' and CDoor='1') then 
                         estado <= ONMICRO1;
                     else
                         estado <= ESPERA;
                     end if;
                 when ONMICRO1 =>
+                    reg_estados <= '011';
                     reg_showtime <= reg_showtime - 1;
                     show_time <= reg_showtime;
                     onMicro <= '1';
@@ -64,6 +70,7 @@ begin
                         estado <= ONMICRO1;
                     end if;
                 when ONALARM1 =>
+                    reg_estados <= '100';
                     onAlarm <= '1';
                     onMicro <= '0';
                     reg_showtime <= u_zero;
