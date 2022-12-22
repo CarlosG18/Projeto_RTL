@@ -71,6 +71,7 @@ begin
                     b2 <= '0';
                     b3 <= '1';
                     reg_showtime <= Data_time;
+                    show_time <= Data_time;
                     estado <= ESPERA;
                 when ESPERA =>
                     reg_estados <= "010";
