@@ -104,8 +104,10 @@ begin
                     show_time <= reg_showtime;
                     --onMicro <= '1';
                     if (reg_showtime = u_zero) then 
+                        tc <= '1';
                         estado <= ONALARM1;
                     else  
+                        tc <= '0';
                         estado <= ONMICRO1;
                     end if;
                 when ONALARM1 =>
