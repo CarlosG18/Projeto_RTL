@@ -60,7 +60,7 @@ begin
                     onMicro <= '1';
                     if (show_time = u_zero) then 
                         estado <= ONALARM1;
-                    else then 
+                    else  
                         estado <= ONMICRO1;
                     end if;
                 when ONALARM1 =>
