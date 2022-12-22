@@ -65,6 +65,7 @@ begin
                     end if;
                 when ONALARM1 =>
                     onAlarm <= '1';
+                    onMicro <= '0';
                     reg_showtime <= u_zero;
                     if (CDoor='1') then 
                         estado <= ONALARM1;
