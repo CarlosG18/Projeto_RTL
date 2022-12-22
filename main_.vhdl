@@ -34,7 +34,7 @@ begin
 
   n1 <= (not(b1_aux) and b2_aux and b3_aux and tc) or (b1_aux and not(b2_aux) and not(b3_aux) and CDoor);
   
-  n2 <=(not(b1_aux) and not(b2_aux) and b3_aux) or (not(b1_aux) and b2_aux and not(b3_aux) and not(BtnOn) and not(CDoor)) or (not(b1_aux) and b2_aux and not(b3_aux) and not(BtnOn) and CDoor) or (not(b1_aux) and b2_aux and not(b3_aux) and BtnOn and not(CDoor)) or (not(b1_aux) and b2_aux and not(b3_aux) and BtnOn and CDoor) or (not(b1_aux) and b2_aux and b3_aux and not(tc));
+  n2 <= (not(b1_aux) and not(b2_aux) and b3_aux) or (not(b1_aux) and b2_aux and not(b3_aux) and not(CDoor) and not(BtnOn)) or (not(b1_aux) and b2_aux and not(b3_aux) and not(BtnOn) and CDoor) or (not(b1_aux) and b2_aux and not(b3_aux) and BtnOn and not(CDoor)) or (not(b1_aux) and b2_aux and not(b3_aux) and BtnOn and CDoor) or (not(b1_aux) and b2_aux and not(b3_aux) and not(tc));
   
   n3 <= (not(b1_aux) and not(b2_aux) and not(b3_aux) and BtnTime) or (not(b1_aux) and b2_aux and not(b3_aux) and BtnOn and CDoor) or (not(b1_aux) and b2_aux and b3_aux and not(tc));
 
