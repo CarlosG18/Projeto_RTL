@@ -58,7 +58,7 @@ begin
                     reg_showtime <= reg_showtime - 1;
                     show_time <= reg_showtime;
                     onMicro <= '1';
-                    if (show_time = u_zero) then 
+                    if (reg_showtime = u_zero) then 
                         estado <= ONALARM1;
                     else  
                         estado <= ONMICRO1;
