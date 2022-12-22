@@ -77,8 +77,6 @@ BEGIN
   n1 <= (not(b1) and b2 and b3 and regtemp_end_aux) and (b1 and not(b2) and not(b3) and not(CDoor));
   n2 <= (not(b1) and not(b2) and b3 and BtnTime) or (not(b1) and b2 and not(b3)) or (not(b1) and b2 and b3 and not(regtemp_end_aux));
   n3 <= (not(b1) and not(b2) and not(b3)) or (not(b1) and b2 and not(b3) and BtnOn and CDoor) or (not(b1) and b2 and b3 and not(regtemp_end_aux)) or (b1 and not(b2) and not(b3) and CDoor);
-  On_decre <=(not(b1) and b2 and b3 and not(regtemp_end_aux)) or (not(b1) and b2 and b3 and regtemp_end_aux);
-  On_decre_aux <= (b1 and not(b2) and not(b3) and not(CDoor)) or (b1 and not(b2) and not(b3) and CDoor);
   
   u1 : RegTemp port map(data_RegTemp => data_Time, RegTemp_Clear => regtempClear, Clock_RegTemp => Clock, Q_RegTemp => saida_RegTemp, RegTemp_Load => regtempLoad);
   
