@@ -32,9 +32,11 @@ architecture comportamento of main is
     constant u_um : unsigned (0 downto 0) := "1";
 begin
 
-  n1 <= (not(b1_aux) and b2_aux and b3_aux and regtemp_end_aux) and (b1_aux and not(b2_aux) and not(b3_aux) and not(CDoor));
-  n2 <= (not(b1_aux) and not(b2_aux) and b3_aux and BtnTime) or (not(b1_aux) and b2_aux and not(b3_aux)) or (not(b1_aux) and b2_aux and b3_aux and not(tc));
-  n3 <= (not(b1_aux) and not(b2_aux) and not(b3_aux)) or (not(b1_aux) and b2_aux and not(b3_aux) and BtnOn and CDoor) or (not(b1_aux) and b2_aux and b3_aux and not(tc)) or (b1_aux and not(b2_aux) and not(b3_aux) and CDoor);
+  n1 <= (not(b1_aux) and b2_aux and b3_aux and tc) or (b1_aux and not(b2_aux) and not(b3_aux) and CDoor);
+  
+  n2 <=(not(b1_aux) and not(b2_aux) and b3_aux) or (not(b1_aux) and b2_aux and not(b3_aux) and not(BtnOn) and not(CDoor)) or (not(b1_aux) and b2_aux and not(b3_aux) and not(BtnOn) and CDoor) or (not(b1_aux) and b2_aux and not(b3_aux) and BtnOn and not(CDoor)) or (not(b1_aux) and b2_aux and not(b3_aux) and BtnOn and CDoor) or (not(b1_aux) and b2_aux and b3_aux and not(tc));
+  
+  n3 <= (not(b1_aux) and not(b2_aux) and not(b3_aux) and BtnTime) or (not(b1_aux) and b2_aux and not(b3_aux) and BtnOn and CDoor) or (not(b1_aux) and b2_aux and b3_aux and not(tc));
 
     maquinadeestados : process(clk, rst)
     begin
