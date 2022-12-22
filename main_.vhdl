@@ -17,7 +17,7 @@ entity main is
 end main;
 
 architecture comportamento of main is
-    type tipoestado is (START, SETS, ESPERA, ONMICRO_, ONALARM_);
+    type tipoestado is (START, SETS, ESPERA, ONMICRO1, ONALARM1);
 
     signal estado : tipoestado;
     signal reg_showtime : unsigned (12 downto 0);
